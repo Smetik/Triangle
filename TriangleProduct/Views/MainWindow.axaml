@@ -1,0 +1,108 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:TriangleProduct.ViewModels"
+        x:Class="TriangleProduct.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        mc:Ignorable="d"
+        Width="900"
+        Height="700"
+        MinWidth="900"
+        MinHeight="700"
+        Title="Определение типа треугольника">
+
+  <Grid RowDefinitions="Auto,*" Background="#F5F7FB">
+    <Border Background="#1F2A44" Padding="24" CornerRadius="0,0,20,20">
+      <StackPanel Spacing="8">
+        <TextBlock Text="Анализатор треугольников"
+                   FontSize="28"
+                   FontWeight="SemiBold"
+                   Foreground="White" />
+        <TextBlock Text="Приложение принимает целые числа, проверяет корректность ввода и определяет тип треугольника."
+                   TextWrapping="Wrap"
+                   Foreground="#D7E2FF"
+                   FontSize="14" />
+      </StackPanel>
+    </Border>
+
+    <Grid Grid.Row="1" Margin="24" ColumnDefinitions="*,*" ColumnSpacing="20">
+      <Border Background="White" CornerRadius="20" Padding="24" BoxShadow="0 12 24 0 #18000000">
+        <StackPanel Spacing="18">
+          <TextBlock Text="Входные данные" FontSize="22" FontWeight="SemiBold" />
+          <TextBlock Text="Введите длины трех сторон треугольника. Допускаются только целые числа больше нуля."
+                     TextWrapping="Wrap"
+                     Foreground="#5F6B7A" />
+
+          <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*" RowSpacing="14" ColumnSpacing="14">
+            <TextBlock Text="Сторона A:" VerticalAlignment="Center" FontWeight="SemiBold" />
+            <TextBox Grid.Column="1"
+                     Text="{Binding SideA}"
+                     Watermark="Например, 5"
+                     HorizontalAlignment="Stretch" />
+
+            <TextBlock Grid.Row="1" Text="Сторона B:" VerticalAlignment="Center" FontWeight="SemiBold" />
+            <TextBox Grid.Row="1"
+                     Grid.Column="1"
+                     Text="{Binding SideB}"
+                     Watermark="Например, 5"
+                     HorizontalAlignment="Stretch" />
+
+            <TextBlock Grid.Row="2" Text="Сторона C:" VerticalAlignment="Center" FontWeight="SemiBold" />
+            <TextBox Grid.Row="2"
+                     Grid.Column="1"
+                     Text="{Binding SideC}"
+                     Watermark="Например, 8"
+                     HorizontalAlignment="Stretch" />
+          </Grid>
+
+          <WrapPanel Orientation="Horizontal" ItemHeight="40" ItemWidth="210">
+            <Button Content="Определить тип"
+                    Command="{Binding CheckTriangleCommand}"
+                    HorizontalAlignment="Left"
+                    CornerRadius="30"/>
+            <Button Content="Очистить"
+                    Command="{Binding ClearCommand}"
+                    HorizontalAlignment="Left" 
+                    CornerRadius="30"/>
+          </WrapPanel>
+
+          <Border Background="#F8FAFC" BorderBrush="#E2E8F0" BorderThickness="1" CornerRadius="14" Padding="16">
+            <StackPanel Spacing="8">
+              <TextBlock Text="Механизмы защиты" FontWeight="SemiBold" />
+              <TextBlock Text="1. Проверка заполнения всех полей.&#x0a;2. Проверка на целочисленный ввод.&#x0a;3. Запрет нуля и отрицательных значений.&#x0a;4. Проверка неравенства треугольника."
+                         TextWrapping="Wrap"
+                         Foreground="#5F6B7A" />
+            </StackPanel>
+          </Border>
+        </StackPanel>
+      </Border>
+
+      <Border Grid.Column="1" Background="White" CornerRadius="20" Padding="24" BoxShadow="0 12 24 0 #18000000">
+        <StackPanel Spacing="16">
+          <TextBlock Text="Статус проверки" FontSize="22" FontWeight="SemiBold" />
+
+          <Border Background="#EEF2FF" CornerRadius="999" Padding="12,6" HorizontalAlignment="Left">
+            <TextBlock Text="{Binding ResultBadge}" FontWeight="SemiBold" Foreground="#334155" />
+          </Border>
+
+          <Border Background="#F8FAFC" BorderBrush="#E2E8F0" BorderThickness="1" CornerRadius="16" Padding="20">
+            <StackPanel Spacing="10">
+              <TextBlock Text="{Binding ResultTitle}" FontSize="20" FontWeight="SemiBold" />
+              <TextBlock Text="{Binding ResultMessage}" TextWrapping="Wrap" FontSize="15" />
+            </StackPanel>
+          </Border>
+
+          <Border Background="#F8FAFC" BorderBrush="#E2E8F0" BorderThickness="1" CornerRadius="16" Padding="20">
+            <StackPanel Spacing="8">
+              <TextBlock Text="Примеры" FontWeight="SemiBold" />
+              <TextBlock Text="• 4, 4, 4 → равносторонний&#x0a;• 5, 5, 8 → равнобедренный&#x0a;• 3, 4, 5 → разносторонний&#x0a;• 1, 2, 3 → ошибка по неравенству треугольника"
+                         TextWrapping="Wrap"
+                         Foreground="#5F6B7A" />
+            </StackPanel>
+          </Border>
+        </StackPanel>
+      </Border>
+    </Grid>
+  </Grid>
+</Window>
